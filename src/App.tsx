@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import CityInput from "./components/CityInput";
+import WeatherChart from "./components/WeatherChart";
+import { getWeatherForecast } from "./services/weatherService";
+import "./index.css";
+import { Container } from "./styles";
 
-function App() {
+const App: React.FC = () => {
+  const [forecastData, setForecastData] = useState<any[]>([]);
+
+  const handleSearch = async (city: string) => {
+    try {
+      const data = await getWeatherForecast(city);
+      setForecastData(data.list);
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <h1>Weather Forecast</h1>
+      <CityInput onSearch={handleSearch} />
+      <WeatherChart data={forecastData} />
+    </Container>
   );
-}
+};
 
 export default App;
