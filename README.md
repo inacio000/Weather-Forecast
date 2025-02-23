@@ -27,4 +27,4 @@
   > cd weather-forecast
   > npm start
 
-### [🔗Нажмите здесь, чтобы просмотреть сайт](weatherforecast-test.netlify.app)
+### [🔗Нажмите здесь, чтобы просмотреть сайт](https://weatherforecast-test.netlify.app/)
